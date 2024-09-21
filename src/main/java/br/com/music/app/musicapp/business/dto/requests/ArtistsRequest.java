@@ -4,6 +4,7 @@ public record ArtistsRequest(
         String name,
         String type,
         String created,
-        String origin
+        String origin,
+        String record
 ) {
 }
