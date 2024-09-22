@@ -5,6 +5,7 @@ import br.com.music.app.musicapp.business.dto.responses.ArtistsResponse;
 import br.com.music.app.musicapp.business.repository.RecordRepository;
 import br.com.music.app.musicapp.business.util.DateConverters;
 import br.com.music.app.musicapp.models.Artists;
+import br.com.music.app.musicapp.models.Record;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,6 +37,11 @@ public class ArtistsMapper {
         var entity = new Artists();
         BeanUtils.copyProperties(request,entity);
         var recordBy = repository.findRecordByName(request.record());
+        if(recordBy == null){
+            var record = new Record();
+            record.setName(request.record());
+            recordBy = repository.save(record);
+        }
         var dateCreated = converters.convertToDate(request.created());
         entity.setRecordByRecordId(recordBy);
         entity.setDateCreate(dateCreated);

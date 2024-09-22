@@ -10,5 +10,5 @@ public class AlbunsResponse {
     private Long id;
     private String name;
     private String artistsName;
-    private String stylen;
+    private String style;
 }
