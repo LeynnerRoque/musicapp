@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ArtistsRepository extends JpaRepository<Artists,Long> {
+
+    Artists findArtistsByName(String name);
 }
