@@ -5,6 +5,7 @@ import br.com.music.app.musicapp.business.dto.responses.AlbunsResponse;
 import br.com.music.app.musicapp.business.repository.ArtistsRepository;
 import br.com.music.app.musicapp.business.repository.StyleRepository;
 import br.com.music.app.musicapp.models.Albuns;
+import br.com.music.app.musicapp.models.Style;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,6 +35,14 @@ public class AlbunsMapper {
         BeanUtils.copyProperties(request,entity);
         var artists = repository.findArtistsByName(request.artists());
         var style = styleRepository.findStyleByNameStyle(request.style());
+        /**
+        * Create a new Style if not exists
+        * */
+        if(style == null){
+            var entityStyle = new Style();
+            entityStyle.setNameStyle(request.style());
+            style = styleRepository.save(entityStyle);
+        }
         entity.setArtistsByArtistsId(artists);
         entity.setStyleByStyleId(style);
         return entity;

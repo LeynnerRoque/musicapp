@@ -37,6 +37,10 @@ public class ArtistsMapper {
         var entity = new Artists();
         BeanUtils.copyProperties(request,entity);
         var recordBy = repository.findRecordByName(request.record());
+        /**
+         * Create a new Record if not exists
+         */
+
         if(recordBy == null){
             var record = new Record();
             record.setName(request.record());
