@@ -35,4 +35,9 @@ public class AlbunsController {
     public ResponseEntity<List<AlbunsResponse>> listAll(){
         return ResponseEntity.ok(service.listAll());
     }
+
+    @DeleteMapping
+    public ResponseEntity<String> remove(@RequestParam("id") Long id){
+        return ResponseEntity.ok(service.delete(id));
+    }
 }

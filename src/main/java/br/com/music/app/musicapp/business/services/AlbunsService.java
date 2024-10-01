@@ -44,4 +44,13 @@ public class AlbunsService {
     public List<AlbunsResponse> listAll(){
         return mapper.toList(repository.findAll());
     }
+
+    public String delete(Long id){
+        if(repository.existsById(id)){
+            repository.deleteById(id);
+            return "api.service.log.success.remove";
+        }else{
+            return "api.service.log.error.not.found";
+        }
+    }
 }

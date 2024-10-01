@@ -36,4 +36,9 @@ public class StyleController {
         return ResponseEntity.ok(service.findAll());
     }
 
+    @DeleteMapping
+    public ResponseEntity<String> remove(@RequestParam("id") Long id){
+        return ResponseEntity.ok(service.delete(id));
+    }
+
 }
