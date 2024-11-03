@@ -3,12 +3,17 @@ package br.com.music.app.musicapp.api.config.client;
 import br.com.music.app.musicapp.api.config.client.request.AuthRequest;
 import br.com.music.app.musicapp.api.config.client.response.AuthResponse;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "spotifyauth", url = "https://accounts.spotify.com/api/token")
+@FeignClient(
+        value = "spotifyauth",
+        url = "https://accounts.spotify.com",
+        contextId = "spotifycloud",
+        configuration = ConfigAccess.class)
 public interface AuthSpotify {
 
-    @PostMapping
+    @PostMapping(value = "/api/token", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     AuthResponse getAccess(@RequestBody AuthRequest request);
 }
