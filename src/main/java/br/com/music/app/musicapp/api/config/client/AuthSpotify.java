@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(
         value = "spotifyauth",
-        url = "https://accounts.spotify.com",
-        contextId = "spotifycloud",
-        configuration = ConfigAccess.class)
+        url = "https://accounts.spotify.com")
 public interface AuthSpotify {
 
     @PostMapping(value = "/api/token", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
