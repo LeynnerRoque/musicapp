@@ -25,7 +25,7 @@ public class KafkaConfig {
         Map<String, Object> config = new HashMap<>();
         // Adding the Configuration
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                "localhost:9092");
+                "http://localhost:9092");
         config.put(ConsumerConfig.GROUP_ID_CONFIG,
                 "group_id");
         config.put(
@@ -35,19 +35,17 @@ public class KafkaConfig {
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
                 JsonDeserializer.class);
         // Returning message in JSON format
-        return new DefaultKafkaConsumerFactory<>(
-                config, new StringDeserializer(),
-                new JsonDeserializer<>(MessageResponse.class));
+        return new DefaultKafkaConsumerFactory<>(config,new StringDeserializer(), new JsonDeserializer<>(MessageResponse.class));
     }
 
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String,MessageResponse> messageListener() {
-        ConcurrentKafkaListenerContainerFactory<
-                String, MessageResponse> factory
-                = new ConcurrentKafkaListenerContainerFactory<>();
+        ConcurrentKafkaListenerContainerFactory<String, MessageResponse> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }
+
+
 
 }
