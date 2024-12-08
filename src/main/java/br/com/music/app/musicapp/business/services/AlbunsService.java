@@ -1,5 +1,7 @@
 package br.com.music.app.musicapp.business.services;
 
+import br.com.music.app.musicapp.api.config.client.response.AlbumsSpotifyResponse;
+import br.com.music.app.musicapp.api.config.client.services.AlbunClientService;
 import br.com.music.app.musicapp.business.dto.mappers.AlbunsMapper;
 import br.com.music.app.musicapp.business.dto.requests.AlbunsRequest;
 import br.com.music.app.musicapp.business.dto.responses.AlbunsResponse;
@@ -12,11 +14,17 @@ import java.util.List;
 @Service
 public class AlbunsService {
 
-    @Autowired
-    private AlbunsRepository repository;
 
-    @Autowired
-    private AlbunsMapper mapper;
+    private final AlbunsRepository repository;
+    private final AlbunsMapper mapper;
+    private final AlbunClientService albunClientService;
+
+    public AlbunsService(AlbunsRepository repository, AlbunsMapper mapper, AlbunClientService albunClientService) {
+        this.repository = repository;
+        this.mapper = mapper;
+        this.albunClientService = albunClientService;
+    }
+
 
     public AlbunsResponse create(AlbunsRequest request){
         try{
@@ -52,5 +60,15 @@ public class AlbunsService {
         }else{
             return "api.service.log.error.not.found";
         }
+    }
+
+    public String getBySpotifyName(String id){
+        try{
+            return albunClientService.getAlbumsBySpotifyName(id);
+        }catch (Exception e){
+            e.printStackTrace();
+           return null;
+        }
+
     }
 }
