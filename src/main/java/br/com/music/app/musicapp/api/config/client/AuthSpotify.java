@@ -1,6 +1,6 @@
 package br.com.music.app.musicapp.api.config.client;
 
-import br.com.music.app.musicapp.api.config.client.request.AuthRequest;
+import br.com.music.app.musicapp.api.config.client.request.CredentialsRequest;
 import br.com.music.app.musicapp.api.config.client.response.AuthResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -13,5 +13,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface AuthSpotify {
 
     @PostMapping(value = "/api/token", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    AuthResponse getAccess(@RequestBody AuthRequest request);
+    AuthResponse getAccess(@RequestBody CredentialsRequest request);
 }

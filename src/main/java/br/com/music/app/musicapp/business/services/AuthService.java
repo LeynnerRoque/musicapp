@@ -1,11 +1,11 @@
 package br.com.music.app.musicapp.business.services;
 
 import br.com.music.app.musicapp.api.config.client.AuthSpotify;
-import br.com.music.app.musicapp.api.config.client.request.AuthRequest;
+import br.com.music.app.musicapp.api.config.client.request.CredentialsRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+@Service
 public class AuthService {
 
     @Autowired
@@ -16,7 +16,7 @@ public class AuthService {
     private String grantType = "client_credentials";
 
     public String token(){
-        var request = new AuthRequest(grantType,clientId,secret);
+        var request = new CredentialsRequest(grantType,clientId,secret);
         return service.getAccess(request).getToken();
     }
 

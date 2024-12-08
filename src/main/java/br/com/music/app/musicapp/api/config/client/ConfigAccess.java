@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
+@Configuration
 public class ConfigAccess{
 
     @Autowired
@@ -15,7 +15,7 @@ public class ConfigAccess{
     private static final String BEARER = "Bearer ";
 
     @Bean
-    public RequestInterceptor getAccess(){
+    public RequestInterceptor getSpotifyAuthenticationAccess(){
         var token = authService.token();
        return requestTemplate -> {
            String accesstoken = token;
