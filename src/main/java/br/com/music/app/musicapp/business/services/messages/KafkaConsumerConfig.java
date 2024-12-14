@@ -1,4 +1,4 @@
-package br.com.music.app.musicapp.business.services;
+package br.com.music.app.musicapp.business.services.messages;
 
 
 import br.com.music.app.musicapp.business.dto.responses.MessageResponse;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 @EnableKafka
 @Configuration
-public class KafkaConfig {
+public class KafkaConsumerConfig {
 
     @Bean
     public ConsumerFactory<String, MessageResponse> consumerFactory() {

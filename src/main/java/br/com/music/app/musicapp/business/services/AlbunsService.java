@@ -6,6 +6,7 @@ import br.com.music.app.musicapp.business.dto.mappers.AlbunsMapper;
 import br.com.music.app.musicapp.business.dto.requests.AlbunsRequest;
 import br.com.music.app.musicapp.business.dto.responses.AlbunsResponse;
 import br.com.music.app.musicapp.business.repository.AlbunsRepository;
+import br.com.music.app.musicapp.business.services.messages.KafkaProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +19,13 @@ public class AlbunsService {
     private final AlbunsRepository repository;
     private final AlbunsMapper mapper;
     private final AlbunClientService albunClientService;
+    private final KafkaProducerService kafkaProducerService;
 
-    public AlbunsService(AlbunsRepository repository, AlbunsMapper mapper, AlbunClientService albunClientService) {
+    public AlbunsService(AlbunsRepository repository, AlbunsMapper mapper, AlbunClientService albunClientService, KafkaProducerService kafkaProducerService) {
         this.repository = repository;
         this.mapper = mapper;
         this.albunClientService = albunClientService;
+        this.kafkaProducerService = kafkaProducerService;
     }
 
 
@@ -64,6 +67,7 @@ public class AlbunsService {
 
     public String getBySpotifyName(String id){
         try{
+            kafkaProducerService.sendMessage("consulta-api-spotify","consultou na api do spotify");
             return albunClientService.getAlbumsBySpotifyName(id);
         }catch (Exception e){
             e.printStackTrace();

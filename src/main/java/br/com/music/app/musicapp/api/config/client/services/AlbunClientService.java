@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(
         value = "albunsspotify",
-        url = "https://api.spotify.com/v1")
+        url = "${spring.feign.spotify.url.base}")
 public interface AlbunClientService {
 
     @GetMapping("/albums/{id}")
