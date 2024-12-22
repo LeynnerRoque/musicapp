@@ -9,4 +9,6 @@ import lombok.Setter;
 public class AlbumsSpotifyResponse {
     @FormProperty("album_type")
     private String albumType;
+    @FormProperty("total_tracks")
+    private int totalTracks;
 }

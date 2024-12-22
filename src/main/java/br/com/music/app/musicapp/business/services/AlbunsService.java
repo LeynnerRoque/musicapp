@@ -88,14 +88,14 @@ public class AlbunsService {
 
     public String getByTracksSpotify(String id){
         try{
-            var message = "Get Album/Track in API Spotify: "+ id;
-            var messageError = "Error on get Album/Track in API Spotify: "+ id;
+            var message = "Get Album/Track in API Spotify: ";
+            var messageError = "Error on get Album/Track in API Spotify: ";
             var response = trackClientService.getTracksBySpotifyName(id);
 
             if(!response.isBlank()){
-                kafkaProducerService.sendMessage("consulta-api-spotify",message);
+                kafkaProducerService.sendMessage("consulta-api-spotify",message+response);
             }else{
-                kafkaProducerService.sendMessage("consulta-api-spotify",messageError);
+                kafkaProducerService.sendMessage("consulta-api-spotify",messageError+id);
             }
 
             return response;
