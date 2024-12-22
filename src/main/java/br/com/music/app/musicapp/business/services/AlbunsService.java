@@ -1,6 +1,5 @@
 package br.com.music.app.musicapp.business.services;
 
-import br.com.music.app.musicapp.api.config.client.response.AlbumsSpotifyResponse;
 import br.com.music.app.musicapp.api.config.client.services.AlbunClientService;
 import br.com.music.app.musicapp.api.config.client.services.TrackClientService;
 import br.com.music.app.musicapp.business.dto.mappers.AlbunsMapper;
@@ -23,6 +22,7 @@ public class AlbunsService {
     private final TrackClientService trackClientService;
     private final KafkaProducerService kafkaProducerService;
 
+    @Autowired
     public AlbunsService(AlbunsRepository repository, AlbunsMapper mapper, AlbunClientService albunClientService, TrackClientService trackClientService, KafkaProducerService kafkaProducerService) {
         this.repository = repository;
         this.mapper = mapper;
