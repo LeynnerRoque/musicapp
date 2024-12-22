@@ -46,4 +46,9 @@ public class AlbunsController {
     public ResponseEntity<String> getBySpotifyName(@PathVariable("id") String id){
         return ResponseEntity.ok(service.getBySpotifyName(id));
     }
+
+    @GetMapping("/spotify/tracks/{id}")
+    public ResponseEntity<String> getByTracksSpotifyId(@PathVariable("id") String id){
+        return ResponseEntity.ok(service.getByTracksSpotify(id));
+    }
 }

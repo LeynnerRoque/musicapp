@@ -2,6 +2,7 @@ package br.com.music.app.musicapp.business.services;
 
 import br.com.music.app.musicapp.api.config.client.response.AlbumsSpotifyResponse;
 import br.com.music.app.musicapp.api.config.client.services.AlbunClientService;
+import br.com.music.app.musicapp.api.config.client.services.TrackClientService;
 import br.com.music.app.musicapp.business.dto.mappers.AlbunsMapper;
 import br.com.music.app.musicapp.business.dto.requests.AlbunsRequest;
 import br.com.music.app.musicapp.business.dto.responses.AlbunsResponse;
@@ -19,12 +20,14 @@ public class AlbunsService {
     private final AlbunsRepository repository;
     private final AlbunsMapper mapper;
     private final AlbunClientService albunClientService;
+    private final TrackClientService trackClientService;
     private final KafkaProducerService kafkaProducerService;
 
-    public AlbunsService(AlbunsRepository repository, AlbunsMapper mapper, AlbunClientService albunClientService, KafkaProducerService kafkaProducerService) {
+    public AlbunsService(AlbunsRepository repository, AlbunsMapper mapper, AlbunClientService albunClientService, TrackClientService trackClientService, KafkaProducerService kafkaProducerService) {
         this.repository = repository;
         this.mapper = mapper;
         this.albunClientService = albunClientService;
+        this.trackClientService = trackClientService;
         this.kafkaProducerService = kafkaProducerService;
     }
 
@@ -67,12 +70,38 @@ public class AlbunsService {
 
     public String getBySpotifyName(String id){
         try{
-            kafkaProducerService.sendMessage("consulta-api-spotify","consultou na api do spotify");
-            return albunClientService.getAlbumsBySpotifyName(id);
+            var message = "Get Album in API Spotify: "+ id;
+            var messageError = "Get Error on Album in API Spotify: "+ id;
+            var response = albunClientService.getAlbumsBySpotifyName(id);
+            if(!response.isBlank()){
+                kafkaProducerService.sendMessage("consulta-api-spotify",message);
+            }else{
+                kafkaProducerService.sendMessage("consulta-api-spotify",messageError);
+            }
+            return response;
         }catch (Exception e){
             e.printStackTrace();
            return null;
         }
+    }
 
+
+    public String getByTracksSpotify(String id){
+        try{
+            var message = "Get Album/Track in API Spotify: "+ id;
+            var messageError = "Error on get Album/Track in API Spotify: "+ id;
+            var response = trackClientService.getTracksBySpotifyName(id);
+
+            if(!response.isBlank()){
+                kafkaProducerService.sendMessage("consulta-api-spotify",message);
+            }else{
+                kafkaProducerService.sendMessage("consulta-api-spotify",messageError);
+            }
+
+            return response;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }
