@@ -1,7 +1,7 @@
 package br.com.music.app.musicapp.api.controllers;
 
-import br.com.music.app.musicapp.business.dto.requests.StyleRequest;
-import br.com.music.app.musicapp.business.dto.responses.StyleResponse;
+import br.com.music.app.musicapp.domain.dto.requests.StyleRequest;
+import br.com.music.app.musicapp.domain.dto.responses.StyleResponse;
 import br.com.music.app.musicapp.business.services.StyleService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package br.com.music.app.musicapp.api.controllers;
 
-import br.com.music.app.musicapp.business.dto.requests.AlbunsRequest;
-import br.com.music.app.musicapp.business.dto.responses.AlbunsResponse;
+import br.com.music.app.musicapp.domain.dto.requests.AlbunsRequest;
+import br.com.music.app.musicapp.domain.dto.responses.AlbunsResponse;
 import br.com.music.app.musicapp.business.services.AlbumsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

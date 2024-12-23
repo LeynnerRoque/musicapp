@@ -1,8 +1,8 @@
 package br.com.music.app.musicapp.api.controllers;
 
 import br.com.music.app.musicapp.api.config.client.response.ArtistsSpotifyResponse;
-import br.com.music.app.musicapp.business.dto.requests.ArtistsRequest;
-import br.com.music.app.musicapp.business.dto.responses.ArtistsResponse;
+import br.com.music.app.musicapp.domain.dto.requests.ArtistsRequest;
+import br.com.music.app.musicapp.domain.dto.responses.ArtistsResponse;
 import br.com.music.app.musicapp.business.services.ArtistsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

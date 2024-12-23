@@ -1,4 +1,4 @@
-package br.com.music.app.musicapp.business.dto.responses;
+package br.com.music.app.musicapp.domain.dto.responses;
 
 import lombok.Getter;
 import lombok.Setter;

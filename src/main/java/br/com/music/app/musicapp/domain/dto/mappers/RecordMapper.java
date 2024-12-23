@@ -1,7 +1,7 @@
-package br.com.music.app.musicapp.business.dto.mappers;
+package br.com.music.app.musicapp.domain.dto.mappers;
 
-import br.com.music.app.musicapp.business.dto.responses.RecordResponse;
-import br.com.music.app.musicapp.models.Record;
+import br.com.music.app.musicapp.domain.dto.responses.RecordResponse;
+import br.com.music.app.musicapp.domain.models.Record;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 

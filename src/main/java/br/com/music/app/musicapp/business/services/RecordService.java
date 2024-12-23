@@ -1,9 +1,9 @@
 package br.com.music.app.musicapp.business.services;
 
-import br.com.music.app.musicapp.business.dto.mappers.RecordMapper;
-import br.com.music.app.musicapp.business.dto.requests.RecordRequest;
-import br.com.music.app.musicapp.business.dto.responses.RecordResponse;
-import br.com.music.app.musicapp.business.repository.RecordRepository;
+import br.com.music.app.musicapp.domain.dto.mappers.RecordMapper;
+import br.com.music.app.musicapp.domain.dto.requests.RecordRequest;
+import br.com.music.app.musicapp.domain.dto.responses.RecordResponse;
+import br.com.music.app.musicapp.domain.repository.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

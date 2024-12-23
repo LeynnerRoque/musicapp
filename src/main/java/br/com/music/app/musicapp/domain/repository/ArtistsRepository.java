@@ -1,6 +1,6 @@
-package br.com.music.app.musicapp.business.repository;
+package br.com.music.app.musicapp.domain.repository;
 
-import br.com.music.app.musicapp.models.Artists;
+import br.com.music.app.musicapp.domain.models.Artists;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

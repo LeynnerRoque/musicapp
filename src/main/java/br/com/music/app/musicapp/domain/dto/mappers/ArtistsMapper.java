@@ -1,11 +1,11 @@
-package br.com.music.app.musicapp.business.dto.mappers;
+package br.com.music.app.musicapp.domain.dto.mappers;
 
-import br.com.music.app.musicapp.business.dto.requests.ArtistsRequest;
-import br.com.music.app.musicapp.business.dto.responses.ArtistsResponse;
-import br.com.music.app.musicapp.business.repository.RecordRepository;
+import br.com.music.app.musicapp.domain.dto.requests.ArtistsRequest;
+import br.com.music.app.musicapp.domain.dto.responses.ArtistsResponse;
+import br.com.music.app.musicapp.domain.repository.RecordRepository;
 import br.com.music.app.musicapp.business.util.converters.DateConverters;
-import br.com.music.app.musicapp.models.Artists;
-import br.com.music.app.musicapp.models.Record;
+import br.com.music.app.musicapp.domain.models.Artists;
+import br.com.music.app.musicapp.domain.models.Record;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

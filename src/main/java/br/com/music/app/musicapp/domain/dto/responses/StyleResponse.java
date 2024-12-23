@@ -1,4 +1,4 @@
-package br.com.music.app.musicapp.business.dto.responses;
+package br.com.music.app.musicapp.domain.dto.responses;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

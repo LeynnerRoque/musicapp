@@ -1,9 +1,8 @@
 package br.com.music.app.musicapp.api.controllers;
 
-import br.com.music.app.musicapp.business.dto.requests.RecordRequest;
-import br.com.music.app.musicapp.business.dto.responses.RecordResponse;
+import br.com.music.app.musicapp.domain.dto.requests.RecordRequest;
+import br.com.music.app.musicapp.domain.dto.responses.RecordResponse;
 import br.com.music.app.musicapp.business.services.RecordService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

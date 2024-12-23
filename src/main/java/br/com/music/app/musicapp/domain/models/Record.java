@@ -1,12 +1,10 @@
-package br.com.music.app.musicapp.models;
+package br.com.music.app.musicapp.domain.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "record", schema = "music_db", catalog = "")

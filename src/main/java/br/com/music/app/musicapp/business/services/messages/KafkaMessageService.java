@@ -1,6 +1,6 @@
 package br.com.music.app.musicapp.business.services.messages;
 
-import br.com.music.app.musicapp.business.dto.responses.MessageResponse;
+import br.com.music.app.musicapp.domain.dto.responses.MessageResponse;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.PartitionOffset;
 import org.springframework.kafka.annotation.TopicPartition;

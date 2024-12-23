@@ -1,7 +1,7 @@
 package br.com.music.app.musicapp.business.services.messages;
 
 
-import br.com.music.app.musicapp.business.dto.responses.MessageResponse;
+import br.com.music.app.musicapp.domain.dto.responses.MessageResponse;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
