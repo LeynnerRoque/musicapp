@@ -14,10 +14,10 @@ import java.util.Calendar;
 public class DateConverters {
     public Date convertToDate(String date){
         int year = Integer.parseInt(date.substring(6,10));
-        int mounth = Integer.parseInt(date.substring(3,5));
+        int month = Integer.parseInt(date.substring(3,5));
         int day = Integer.parseInt(date.substring(0,2));
         Calendar calendar = Calendar.getInstance();
-        calendar.set(year,mounth,day);
+        calendar.set(year,month-1,day);
         return new Date(calendar.getTime().getTime());
     }
 
