@@ -4,15 +4,16 @@ import feign.form.FormProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
-public class AlbumsSpotifyResponse {
-    @FormProperty("album_type")
-    private String albumType;
-    @FormProperty("total_tracks")
-    private int totalTracks;
+public class ArtistsSpotifyResponse {
+    @FormProperty("href")
+    private String href;
+    @FormProperty("id")
+    private String id;
     @FormProperty("name")
     private String name;
+    @FormProperty("type")
+    private String type;
+
 }

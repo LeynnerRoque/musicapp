@@ -77,9 +77,9 @@ public class AlbunsService {
         try{
             var response = albunClientService.getAlbumsBySpotifyName(id);
             if(!response.isBlank()){
-                var message = "Get Album in API Spotify: "+ id;
+                var message = "Get Album in API Spotify: ";
                 var albumConvert = spotifyMapper.toResponse(response);
-                kafkaProducerService.sendMessage("consulta-api-spotify",message + albumConvert.getAlbumType());
+                kafkaProducerService.sendMessage("consulta-api-spotify",message + albumConvert.getName());
             }else{
                 var messageError = "Get Error on Album in API Spotify: "+ id;
                 kafkaProducerService.sendMessage("consulta-api-spotify",messageError);

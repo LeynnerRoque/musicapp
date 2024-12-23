@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class AlbumSpotifyMapper {
 
@@ -13,6 +15,7 @@ public class AlbumSpotifyMapper {
         AlbumsSpotifyResponse response = new AlbumsSpotifyResponse();
         response.setAlbumType(object.get("album_type").getAsString());
         response.setTotalTracks(object.get("total_tracks").getAsInt());
+        response.setName(object.get("name").getAsString());
         return response;
     }
 
