@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(
-        value = "albunsspotify",
+        value = "artistsspotify",
         url = "${spring.feign.spotify.url.base}")
-public interface AlbunClientService {
+public interface ArtistsClientService {
 
-    @GetMapping("/albums/{id}")
-    String getAlbumsBySpotifyName(@PathVariable("id") String id);
+    @GetMapping("/artists/{id}")
+    String getArtistsBySpotify(@PathVariable("id") String id);
 }

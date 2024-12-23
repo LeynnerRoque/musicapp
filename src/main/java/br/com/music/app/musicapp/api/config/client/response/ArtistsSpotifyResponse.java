@@ -4,6 +4,8 @@ import feign.form.FormProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class ArtistsSpotifyResponse {
@@ -15,5 +17,7 @@ public class ArtistsSpotifyResponse {
     private String name;
     @FormProperty("type")
     private String type;
+    @FormProperty("genres")
+    private List<String> genres;
 
 }

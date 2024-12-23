@@ -1,5 +1,6 @@
 package br.com.music.app.musicapp.api.controllers;
 
+import br.com.music.app.musicapp.api.config.client.response.ArtistsSpotifyResponse;
 import br.com.music.app.musicapp.business.dto.requests.ArtistsRequest;
 import br.com.music.app.musicapp.business.dto.responses.ArtistsResponse;
 import br.com.music.app.musicapp.business.services.ArtistsService;
@@ -40,5 +41,10 @@ public class ArtistsController {
     @DeleteMapping
     public ResponseEntity<String> remove(@RequestParam("id") Long id){
         return ResponseEntity.ok(service.delete(id));
+    }
+
+    @GetMapping("/spotify/{id}")
+    public ResponseEntity<ArtistsSpotifyResponse> getBySpotify(@PathVariable("id") String id){
+        return ResponseEntity.ok(service.getBySpotify(id));
     }
 }

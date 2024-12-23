@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 
 @Service
 public class AlbumSpotifyMapper {

@@ -1,33 +1,30 @@
 package br.com.music.app.musicapp.business.services;
 
 import br.com.music.app.musicapp.api.config.client.mappers.AlbumSpotifyMapper;
-import br.com.music.app.musicapp.api.config.client.response.AlbumsSpotifyResponse;
-import br.com.music.app.musicapp.api.config.client.services.AlbunClientService;
+import br.com.music.app.musicapp.api.config.client.services.AlbumClientService;
 import br.com.music.app.musicapp.api.config.client.services.TrackClientService;
 import br.com.music.app.musicapp.business.dto.mappers.AlbunsMapper;
 import br.com.music.app.musicapp.business.dto.requests.AlbunsRequest;
 import br.com.music.app.musicapp.business.dto.responses.AlbunsResponse;
 import br.com.music.app.musicapp.business.repository.AlbunsRepository;
 import br.com.music.app.musicapp.business.services.messages.KafkaProducerService;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AlbunsService {
+public class AlbumsService {
 
     private final AlbunsRepository repository;
     private final AlbunsMapper mapper;
-    private final AlbunClientService albunClientService;
+    private final AlbumClientService albunClientService;
     private final TrackClientService trackClientService;
     private final KafkaProducerService kafkaProducerService;
     private final AlbumSpotifyMapper spotifyMapper;
 
     @Autowired
-    public AlbunsService(AlbunsRepository repository, AlbunsMapper mapper, AlbunClientService albunClientService, TrackClientService trackClientService, KafkaProducerService kafkaProducerService, AlbumSpotifyMapper spotifyMapper) {
+    public AlbumsService(AlbunsRepository repository, AlbunsMapper mapper, AlbumClientService albunClientService, TrackClientService trackClientService, KafkaProducerService kafkaProducerService, AlbumSpotifyMapper spotifyMapper) {
         this.repository = repository;
         this.mapper = mapper;
         this.albunClientService = albunClientService;

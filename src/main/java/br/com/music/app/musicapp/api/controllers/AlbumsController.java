@@ -1,9 +1,8 @@
 package br.com.music.app.musicapp.api.controllers;
 
-import br.com.music.app.musicapp.api.config.client.response.AlbumsSpotifyResponse;
 import br.com.music.app.musicapp.business.dto.requests.AlbunsRequest;
 import br.com.music.app.musicapp.business.dto.responses.AlbunsResponse;
-import br.com.music.app.musicapp.business.services.AlbunsService;
+import br.com.music.app.musicapp.business.services.AlbumsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/albuns")
-public class AlbunsController {
+public class AlbumsController {
 
     @Autowired
-    private AlbunsService service;
+    private AlbumsService service;
 
     @PostMapping
     public ResponseEntity<AlbunsResponse> create(@RequestBody AlbunsRequest request){
