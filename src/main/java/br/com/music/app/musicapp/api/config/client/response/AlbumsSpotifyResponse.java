@@ -15,4 +15,8 @@ public class AlbumsSpotifyResponse {
     private int totalTracks;
     @FormProperty("name")
     private String name;
+    @FormProperty("href")
+    private String href;
+    @FormProperty("artists")
+    private List<String> artists;
 }

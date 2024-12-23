@@ -1,5 +1,6 @@
 package br.com.music.app.musicapp.api.controllers;
 
+import br.com.music.app.musicapp.api.config.client.response.AlbumsSpotifyResponse;
 import br.com.music.app.musicapp.domain.dto.requests.AlbunsRequest;
 import br.com.music.app.musicapp.domain.dto.responses.AlbunsResponse;
 import br.com.music.app.musicapp.business.services.AlbumsService;
@@ -42,12 +43,7 @@ public class AlbumsController {
     }
 
     @GetMapping("/spotify/{id}")
-    public ResponseEntity<String> getBySpotifyName(@PathVariable("id") String id){
+    public ResponseEntity<AlbumsSpotifyResponse> getBySpotifyName(@PathVariable("id") String id){
         return ResponseEntity.ok(service.getBySpotifyName(id));
-    }
-
-    @GetMapping("/spotify/tracks/{id}")
-    public ResponseEntity<String> getByTracksSpotifyId(@PathVariable("id") String id){
-        return ResponseEntity.ok(service.getByTracksSpotify(id));
     }
 }
