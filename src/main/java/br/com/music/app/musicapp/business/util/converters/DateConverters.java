@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Calendar;
 
 
@@ -21,6 +22,13 @@ public class DateConverters {
     }
 
     public String convertToFormat(Date date){
+        var formated = new SimpleDateFormat("dd/MM/yyyy");
+        var formatConvert = formated.format(date);
+        return formatConvert;
+    }
+
+
+    public String convertToFormatbyInstant(java.util.Date date){
         var formated = new SimpleDateFormat("dd/MM/yyyy");
         var formatConvert = formated.format(date);
         return formatConvert;
