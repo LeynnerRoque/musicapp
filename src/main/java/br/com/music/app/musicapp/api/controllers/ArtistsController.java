@@ -1,5 +1,6 @@
 package br.com.music.app.musicapp.api.controllers;
 
+import br.com.music.app.musicapp.api.config.client.request.SendToFind;
 import br.com.music.app.musicapp.api.config.client.response.ArtistsSpotifyResponse;
 import br.com.music.app.musicapp.domain.dto.requests.ArtistsRequest;
 import br.com.music.app.musicapp.domain.dto.responses.ArtistsResponse;
@@ -46,5 +47,10 @@ public class ArtistsController {
     @GetMapping("/spotify/{id}")
     public ResponseEntity<ArtistsSpotifyResponse> getBySpotify(@PathVariable("id") String id){
         return ResponseEntity.ok(service.getBySpotify(id));
+    }
+
+    @PostMapping("/create-by-spotify/")
+    public ResponseEntity<ArtistsResponse> createBySpotify(@RequestBody SendToFind codeSpotify){
+        return ResponseEntity.ok(service.createBySpotify(codeSpotify.codeSpotify()));
     }
 }

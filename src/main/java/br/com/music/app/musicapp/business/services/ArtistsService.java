@@ -10,6 +10,7 @@ import br.com.music.app.musicapp.domain.repository.ArtistsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -75,4 +76,24 @@ public class ArtistsService {
             return null;
         }
     }
+
+
+    public ArtistsResponse createBySpotify(String codeSpotify){
+        try{
+            var artistSpotify = spotifyMapper.toResponse(clientService.getArtistsBySpotify(codeSpotify));
+            var request = new ArtistsRequest(
+                    artistSpotify.getName(),
+                    artistSpotify.getType(),
+                    "23/12/2024" ,
+                    artistSpotify.getHref(),
+                    "Unknow Record"
+            );
+            var entity = repository.save(mapper.fromRequesttoEntity(request));
+            return mapper.toResponse(entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
