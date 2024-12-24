@@ -19,12 +19,12 @@ public class ListConvert {
                 .split(",")).toList();
     }
 
-    public List<String> getPropertyValue(List<String> values, String propertyName){
-        List<String> valuesResult= new ArrayList<>();
+    public String getPropertyValue(List<String> values, String propertyName){
+        String valuesResult = "";
 
         for (Object value : values){
             if(value.toString().contains(propertyName)){
-                valuesResult.add(value.toString().replace(propertyName,""));
+                valuesResult = value.toString().replace(propertyName,"");
             }
         }
         return valuesResult;

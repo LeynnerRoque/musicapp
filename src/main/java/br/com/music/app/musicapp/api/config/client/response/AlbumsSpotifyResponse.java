@@ -13,5 +13,5 @@ public class AlbumsSpotifyResponse {
     private int totalTracks;
     private String name;
     private String href;
-    private List<String> artists;
+    private ArtistsSpotifyResponse artists;
 }

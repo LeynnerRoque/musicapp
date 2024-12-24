@@ -7,6 +7,9 @@ import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Component
 public class ArtistsSpotifyMapper {
@@ -23,9 +26,17 @@ public class ArtistsSpotifyMapper {
         response.setType(object.get("type").getAsString());
 
         var genres = listConvert.toList("genres", object);
-
         response.setGenres(genres);
 
+        return response;
+    }
+
+    public ArtistsSpotifyResponse toResponseFromAlbum(List<String> values){
+        ArtistsSpotifyResponse response = new ArtistsSpotifyResponse();
+        response.setName(listConvert.getPropertyValue(values,"name:"));
+        response.setId(listConvert.getPropertyValue(values,"id:"));
+        response.setType(listConvert.getPropertyValue(values,"type:"));
+        response.setHref(listConvert.getPropertyValue(values,"href:"));
         return response;
     }
 }
