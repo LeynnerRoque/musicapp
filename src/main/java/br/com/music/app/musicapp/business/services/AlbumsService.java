@@ -3,7 +3,6 @@ package br.com.music.app.musicapp.business.services;
 import br.com.music.app.musicapp.api.config.client.mappers.AlbumSpotifyMapper;
 import br.com.music.app.musicapp.api.config.client.response.AlbumsSpotifyResponse;
 import br.com.music.app.musicapp.api.config.client.services.AlbumClientService;
-import br.com.music.app.musicapp.api.config.client.services.TrackClientService;
 import br.com.music.app.musicapp.domain.dto.mappers.AlbunsMapper;
 import br.com.music.app.musicapp.domain.dto.requests.AlbunsRequest;
 import br.com.music.app.musicapp.domain.dto.responses.AlbunsResponse;
@@ -20,18 +19,18 @@ public class AlbumsService {
     private final AlbunsRepository repository;
     private final AlbunsMapper mapper;
     private final AlbumClientService albunClientService;
-    private final TrackClientService trackClientService;
     private final KafkaProducerService kafkaProducerService;
     private final AlbumSpotifyMapper spotifyMapper;
+    private final ArtistsService artistsService;
 
     @Autowired
-    public AlbumsService(AlbunsRepository repository, AlbunsMapper mapper, AlbumClientService albunClientService, TrackClientService trackClientService, KafkaProducerService kafkaProducerService, AlbumSpotifyMapper spotifyMapper) {
+    public AlbumsService(AlbunsRepository repository, AlbunsMapper mapper, AlbumClientService albunClientService, KafkaProducerService kafkaProducerService, AlbumSpotifyMapper spotifyMapper, ArtistsService artistsService) {
         this.repository = repository;
         this.mapper = mapper;
         this.albunClientService = albunClientService;
-        this.trackClientService = trackClientService;
         this.kafkaProducerService = kafkaProducerService;
         this.spotifyMapper = spotifyMapper;
+        this.artistsService = artistsService;
     }
 
 
@@ -86,6 +85,27 @@ public class AlbumsService {
             }
         }catch (Exception e){
            return null;
+        }
+    }
+
+
+    public AlbunsResponse createBySpotify(String codeSpotify){
+        try{
+            var responseSpotify = getBySpotifyName(codeSpotify);
+            var artists = artistsService.createBySpotify(responseSpotify.getArtists().getId());
+            var type = artistsService.getBySpotify(responseSpotify.getArtists().getId());
+
+            var request = new AlbunsRequest(
+                    responseSpotify.getName(),
+                    type.getGenres().getFirst(),
+                    artists.getName()
+            );
+
+            var saved = repository.save(mapper.toEntity(request));
+            return mapper.toResponse(saved);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
