@@ -102,9 +102,13 @@ public class AlbumsService {
             );
 
             var saved = repository.save(mapper.toEntity(request));
+            if(saved!=null){
+                kafkaProducerService.sendMessage("database-saved","create item on database");
+            }else{
+                kafkaProducerService.sendMessage("database-saved", "dont create database item");
+            }
             return mapper.toResponse(saved);
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
