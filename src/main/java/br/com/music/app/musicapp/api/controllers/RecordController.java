@@ -16,27 +16,27 @@ public class RecordController {
     @Autowired
     private RecordService service;
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<RecordResponse> create(@RequestBody RecordRequest request){
         return ResponseEntity.ok(service.create(request));
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<RecordResponse> update(@RequestBody RecordResponse response){
         return ResponseEntity.ok(service.update(response));
     }
 
-    @GetMapping("/")
+    @GetMapping("/find")
     public ResponseEntity<RecordResponse> findById(@RequestParam("id") Long id){
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<RecordResponse>> listAll(){
         return ResponseEntity.ok(service.listAll());
     }
 
-    @DeleteMapping
+    @DeleteMapping("/remove")
     public ResponseEntity<String> remove(@RequestParam("id") Long id){
         return ResponseEntity.ok(service.delete(id));
     }

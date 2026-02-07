@@ -18,27 +18,27 @@ public class AlbumsController {
     @Autowired
     private AlbumsService service;
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<AlbunsResponse> create(@RequestBody AlbunsRequest request){
         return  ResponseEntity.ok(service.create(request));
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<AlbunsResponse> update(@RequestBody AlbunsResponse response){
         return  ResponseEntity.ok(service.update(response));
     }
 
-    @GetMapping("/")
+    @GetMapping("/find")
     public ResponseEntity<AlbunsResponse> findbyId(@RequestParam Long id){
         return  ResponseEntity.ok(service.findById(id));
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<AlbunsResponse>> listAll(){
         return ResponseEntity.ok(service.listAll());
     }
 
-    @DeleteMapping
+    @DeleteMapping("/remove")
     public ResponseEntity<String> remove(@RequestParam("id") Long id){
         return ResponseEntity.ok(service.delete(id));
     }

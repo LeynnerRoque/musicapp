@@ -16,27 +16,27 @@ public class StyleController {
     @Autowired
     private StyleService service;
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<StyleResponse> create(@Valid @RequestBody StyleRequest request){
         return ResponseEntity.ok(service.create(request));
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<StyleResponse> update(@Valid @RequestBody StyleResponse request){
         return ResponseEntity.ok(service.update(request));
     }
 
-    @GetMapping("/")
+    @GetMapping("/find")
     public ResponseEntity<StyleResponse> create(@RequestParam Long id){
         return ResponseEntity.ok(service.findBy(id));
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<StyleResponse>> findAll(){
         return ResponseEntity.ok(service.findAll());
     }
 
-    @DeleteMapping
+    @DeleteMapping("/remove")
     public ResponseEntity<String> remove(@RequestParam("id") Long id){
         return ResponseEntity.ok(service.delete(id));
     }
