@@ -23,16 +23,15 @@ public class ArtistsService {
     private final ArtistsClientService clientService;
     private final ArtistsSpotifyMapper spotifyMapper;
     private final DateConverters converters;
-    private final KafkaProducerService kafkaProducerService;
+    //private final KafkaProducerService kafkaProducerService;
 
     @Autowired
-    public ArtistsService(ArtistsRepository repository, ArtistsMapper mapper, ArtistsClientService clientService, ArtistsSpotifyMapper spotifyMapper, DateConverters converters, KafkaProducerService kafkaProducerService) {
+    public ArtistsService(ArtistsRepository repository, ArtistsMapper mapper, ArtistsClientService clientService, ArtistsSpotifyMapper spotifyMapper, DateConverters converters) {
         this.repository = repository;
         this.mapper = mapper;
         this.clientService = clientService;
         this.spotifyMapper = spotifyMapper;
         this.converters = converters;
-        this.kafkaProducerService = kafkaProducerService;
     }
 
 
@@ -41,7 +40,6 @@ public class ArtistsService {
             var entity = repository.save(mapper.fromRequesttoEntity(request));
             return mapper.toResponse(entity);
         }catch (Exception e){
-            e.printStackTrace();
             return null;
         }
     }
@@ -51,7 +49,6 @@ public class ArtistsService {
             var entity = repository.save(mapper.toEntity(response));
             return mapper.toResponse(entity);
         }catch (Exception e){
-            e.printStackTrace();
             return null;
         }
 
@@ -97,11 +94,11 @@ public class ArtistsService {
                     "Unknow Record"
             );
             var entity = repository.save(mapper.fromRequesttoEntity(request));
-            if(entity!=null){
-                kafkaProducerService.sendMessage("database-saved","create item on database");
-            }else{
-                kafkaProducerService.sendMessage("database-saved", "dont create database item");
-            }
+//            if(entity!=null){
+//                kafkaProducerService.sendMessage("database-saved","create item on database");
+//            }else{
+//                kafkaProducerService.sendMessage("database-saved", "dont create database item");
+//            }
             return mapper.toResponse(entity);
         } catch (Exception e) {
             return null;

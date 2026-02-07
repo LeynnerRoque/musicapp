@@ -1,14 +1,20 @@
 package br.com.music.app.musicapp.business.util.converters;
 
+import br.com.music.app.musicapp.api.config.client.response.composes.ImageSpotifyResponse;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Component
 public class ListConvert {
+
+    private final Gson gson = new Gson();
 
     public List<String> toList(String name, JsonObject object){
         return Arrays.stream(object.get(name)
@@ -28,5 +34,13 @@ public class ListConvert {
             }
         }
         return valuesResult;
+    }
+
+    public List<ImageSpotifyResponse> toImageResponseList(String name, JsonObject object) {
+        if (object.get(name) == null || object.get(name).isJsonNull()) {
+            return new ArrayList<>();
+        }
+        Type listType = new TypeToken<ArrayList<ImageSpotifyResponse>>(){}.getType();
+        return gson.fromJson(object.get(name), listType);
     }
 }

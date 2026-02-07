@@ -28,6 +28,12 @@ public class ArtistsSpotifyMapper {
         var genres = listConvert.toList("genres", object);
         response.setGenres(genres);
 
+        var images = listConvert.toImageResponseList("images",object);
+        response.setImages(images);
+
+        response.setPopularity(object.get("popularity").getAsInt());
+        response.setUri(object.get("uri").getAsString());
+
         return response;
     }
 

@@ -19,16 +19,15 @@ public class AlbumsService {
     private final AlbunsRepository repository;
     private final AlbunsMapper mapper;
     private final AlbumClientService albunClientService;
-    private final KafkaProducerService kafkaProducerService;
+    //private final KafkaProducerService kafkaProducerService;
     private final AlbumSpotifyMapper spotifyMapper;
     private final ArtistsService artistsService;
 
     @Autowired
-    public AlbumsService(AlbunsRepository repository, AlbunsMapper mapper, AlbumClientService albunClientService, KafkaProducerService kafkaProducerService, AlbumSpotifyMapper spotifyMapper, ArtistsService artistsService) {
+    public AlbumsService(AlbunsRepository repository, AlbunsMapper mapper, AlbumClientService albunClientService, AlbumSpotifyMapper spotifyMapper, ArtistsService artistsService) {
         this.repository = repository;
         this.mapper = mapper;
         this.albunClientService = albunClientService;
-        this.kafkaProducerService = kafkaProducerService;
         this.spotifyMapper = spotifyMapper;
         this.artistsService = artistsService;
     }
@@ -76,11 +75,11 @@ public class AlbumsService {
             if(!response.isBlank()){
                 var message = "Get Album in API Spotify: ";
                 var albumConvert = spotifyMapper.toResponse(response);
-                kafkaProducerService.sendMessage("consulta-api-spotify",message + albumConvert.getName());
+               // kafkaProducerService.sendMessage("consulta-api-spotify",message + albumConvert.getName());
                 return albumConvert;
             }else{
                 var messageError = "Get Error on Album in API Spotify: "+ id;
-                kafkaProducerService.sendMessage("consulta-api-spotify",messageError);
+                //kafkaProducerService.sendMessage("consulta-api-spotify",messageError);
                 return null;
             }
         }catch (Exception e){
@@ -102,11 +101,11 @@ public class AlbumsService {
             );
 
             var saved = repository.save(mapper.toEntity(request));
-            if(saved!=null){
-                kafkaProducerService.sendMessage("database-saved","create item on database");
-            }else{
-                kafkaProducerService.sendMessage("database-saved", "dont create database item");
-            }
+//            if(saved!=null){
+//                kafkaProducerService.sendMessage("database-saved","create item on database");
+//            }else{
+//                kafkaProducerService.sendMessage("database-saved", "dont create database item");
+//            }
             return mapper.toResponse(saved);
         } catch (Exception e) {
             return null;

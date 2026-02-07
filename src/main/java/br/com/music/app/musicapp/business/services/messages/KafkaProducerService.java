@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.CompletableFuture;
 
-@Service
 public class KafkaProducerService {
 
     @Autowired
