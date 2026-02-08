@@ -11,6 +11,7 @@ import br.com.music.app.musicapp.domain.dto.mappers.ArtistsMapper;
 import br.com.music.app.musicapp.domain.dto.requests.ArtistsRequest;
 import br.com.music.app.musicapp.domain.dto.responses.ArtistsResponse;
 import br.com.music.app.musicapp.domain.repository.ArtistsRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ArtistsService {
 
     private final ArtistsRepository repository;
@@ -113,6 +115,7 @@ public class ArtistsService {
         try{
             return spotifySearchClient.searchArtist(q,"artist");
         } catch (RuntimeException e) {
+            log.warn("Error on find artist: {}",e.getMessage());
             return new SpotifySearchResponse();
         }
     }
