@@ -2,7 +2,9 @@ package br.com.music.app.musicapp.business.services;
 
 import br.com.music.app.musicapp.api.config.client.mappers.ArtistsSpotifyMapper;
 import br.com.music.app.musicapp.api.config.client.response.ArtistsSpotifyResponse;
+import br.com.music.app.musicapp.api.config.client.response.SpotifySearchResponse;
 import br.com.music.app.musicapp.api.config.client.services.ArtistsClientService;
+import br.com.music.app.musicapp.api.config.client.services.SpotifySearchClient;
 import br.com.music.app.musicapp.business.services.messages.KafkaProducerService;
 import br.com.music.app.musicapp.business.util.converters.DateConverters;
 import br.com.music.app.musicapp.domain.dto.mappers.ArtistsMapper;
@@ -24,14 +26,16 @@ public class ArtistsService {
     private final ArtistsSpotifyMapper spotifyMapper;
     private final DateConverters converters;
     //private final KafkaProducerService kafkaProducerService;
+    private final SpotifySearchClient spotifySearchClient;
 
     @Autowired
-    public ArtistsService(ArtistsRepository repository, ArtistsMapper mapper, ArtistsClientService clientService, ArtistsSpotifyMapper spotifyMapper, DateConverters converters) {
+    public ArtistsService(ArtistsRepository repository, ArtistsMapper mapper, ArtistsClientService clientService, ArtistsSpotifyMapper spotifyMapper, DateConverters converters, SpotifySearchClient spotifySearchClient) {
         this.repository = repository;
         this.mapper = mapper;
         this.clientService = clientService;
         this.spotifyMapper = spotifyMapper;
         this.converters = converters;
+        this.spotifySearchClient = spotifySearchClient;
     }
 
 
@@ -102,6 +106,14 @@ public class ArtistsService {
             return mapper.toResponse(entity);
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    public SpotifySearchResponse search(String q){
+        try{
+            return spotifySearchClient.searchArtist(q,"artist");
+        } catch (RuntimeException e) {
+            return new SpotifySearchResponse();
         }
     }
 
