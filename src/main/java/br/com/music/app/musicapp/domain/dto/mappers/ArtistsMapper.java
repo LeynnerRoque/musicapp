@@ -28,6 +28,7 @@ public class ArtistsMapper {
         var dateFormat = converters.convertToFormat(entity.getDateCreate());
         response.setRecord(entity.getRecordByRecordId().getName());
         response.setDateCreated(dateFormat);
+        response.setSpotifyCode(entity.getSpotifyCode());
         return response;
     }
 

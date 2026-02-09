@@ -33,4 +33,6 @@ public class Artists {
     @ManyToOne
     @JoinColumn(name = "record_id", referencedColumnName = "id", nullable = false)
     private Record recordByRecordId;
+    @Column(name = "spotify_code")
+    private String spotifyCode;
 }

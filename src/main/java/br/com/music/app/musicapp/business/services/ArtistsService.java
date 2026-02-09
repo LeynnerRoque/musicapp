@@ -94,7 +94,9 @@ public class ArtistsService {
                     artistSpotify.getHref(),
                     "Unknow Record"
             );
-            var entity = repository.save(mapper.fromRequesttoEntity(request));
+            var entity = mapper.fromRequesttoEntity(request);
+            entity.setSpotifyCode(codeSpotify);
+            repository.save(entity);
 //            if(entity!=null){
 //                kafkaProducerService.sendMessage("database-saved","create item on database");
 //            }else{
