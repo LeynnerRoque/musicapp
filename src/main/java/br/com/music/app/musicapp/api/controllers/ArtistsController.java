@@ -18,33 +18,13 @@ public class ArtistsController {
     @Autowired
     private ArtistsService service;
 
-    @PostMapping("/add")
-    public ResponseEntity<ArtistsResponse> create(@RequestBody ArtistsRequest request){
-        return ResponseEntity.ok(service.create(request));
-    }
-
-    @PutMapping("/update")
-    public ResponseEntity<ArtistsResponse> update(@RequestBody ArtistsResponse response){
-        return ResponseEntity.ok(service.update(response));
-    }
-
-    @GetMapping("/find")
-    @PostMapping
-    private ResponseEntity<ArtistsResponse> findById(@RequestParam Long id){
-        return ResponseEntity.ok(service.findById(id));
-    }
 
     @GetMapping("/all")
     public ResponseEntity<List<ArtistsResponse>> listAll(){
         return ResponseEntity.ok(service.listAll());
     }
 
-    @DeleteMapping("/remove")
-    public ResponseEntity<String> remove(@RequestParam("id") Long id){
-        return ResponseEntity.ok(service.delete(id));
-    }
-
-    @GetMapping("/spotify/{id}")
+    @GetMapping("/code-spotify/{id}")
     public ResponseEntity<ArtistsSpotifyResponse> getBySpotify(@PathVariable("id") String id){
         return ResponseEntity.ok(service.getBySpotify(id));
     }
@@ -54,7 +34,7 @@ public class ArtistsController {
         return ResponseEntity.ok(service.createBySpotify(codeSpotify.codeSpotify()));
     }
 
-    @GetMapping("/findname/{name}")
+    @GetMapping("/find-name/{name}")
     public ResponseEntity<ArtistsSpotifyResponse> getByName(@PathVariable("name") String name){
         return ResponseEntity.ok(service.findByName(name));
     }

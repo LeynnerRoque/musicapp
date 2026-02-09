@@ -18,37 +18,17 @@ public class AlbumsController {
     @Autowired
     private AlbumsService service;
 
-    @PostMapping("/add")
-    public ResponseEntity<AlbunsResponse> create(@RequestBody AlbunsRequest request){
-        return  ResponseEntity.ok(service.create(request));
-    }
-
-    @PutMapping("/update")
-    public ResponseEntity<AlbunsResponse> update(@RequestBody AlbunsResponse response){
-        return  ResponseEntity.ok(service.update(response));
-    }
-
-    @GetMapping("/find")
-    public ResponseEntity<AlbunsResponse> findbyId(@RequestParam Long id){
-        return  ResponseEntity.ok(service.findById(id));
-    }
-
     @GetMapping("/all")
     public ResponseEntity<List<AlbunsResponse>> listAll(){
         return ResponseEntity.ok(service.listAll());
     }
 
-    @DeleteMapping("/remove")
-    public ResponseEntity<String> remove(@RequestParam("id") Long id){
-        return ResponseEntity.ok(service.delete(id));
-    }
-
-    @GetMapping("/spotify/{id}")
+    @GetMapping("/code-spotify/{id}")
     public ResponseEntity<AlbumsSpotifyResponse> getBySpotifyName(@PathVariable("id") String id){
         return ResponseEntity.ok(service.getBySpotifyName(id));
     }
 
-    @PostMapping("/spotify-create-by/")
+    @PostMapping("/create-by-spotify/")
     public ResponseEntity<AlbunsResponse> createBySpotify(@RequestBody SendToFind request){
         return ResponseEntity.ok(service.createBySpotify(request.codeSpotify()));
     }
