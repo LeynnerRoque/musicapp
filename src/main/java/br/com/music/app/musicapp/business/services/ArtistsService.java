@@ -6,6 +6,7 @@ import br.com.music.app.musicapp.api.config.client.services.ArtistsClientService
 import br.com.music.app.musicapp.business.util.converters.DateConverters;
 import br.com.music.app.musicapp.domain.dto.mappers.ArtistsMapper;
 import br.com.music.app.musicapp.domain.dto.requests.ArtistsRequest;
+import br.com.music.app.musicapp.domain.dto.requests.StyleRequest;
 import br.com.music.app.musicapp.domain.dto.responses.ArtistsResponse;
 import br.com.music.app.musicapp.domain.repository.ArtistsRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -24,15 +26,17 @@ public class ArtistsService {
     private final ArtistsClientService clientService;
     private final ArtistsSpotifyMapper spotifyMapper;
     private final DateConverters converters;
+    private final StyleService styleService;
     //private final KafkaProducerService kafkaProducerService;
 
     @Autowired
-    public ArtistsService(ArtistsRepository repository, ArtistsMapper mapper, ArtistsClientService clientService, ArtistsSpotifyMapper spotifyMapper, DateConverters converters) {
+    public ArtistsService(ArtistsRepository repository, ArtistsMapper mapper, ArtistsClientService clientService, ArtistsSpotifyMapper spotifyMapper, DateConverters converters, StyleService styleService) {
         this.repository = repository;
         this.mapper = mapper;
         this.clientService = clientService;
         this.spotifyMapper = spotifyMapper;
         this.converters = converters;
+        this.styleService = styleService;
     }
 
 
@@ -72,6 +76,11 @@ public class ArtistsService {
         }
     }
 
+    public ArtistsSpotifyResponse findByName(String name){
+        var entity = repository.findArtistsByName(name);
+        return getBySpotify(entity.getSpotifyCode());
+    }
+
     public ArtistsSpotifyResponse getBySpotify(String id){
         try{
             var response = clientService.getArtistsBySpotify(id);
@@ -94,6 +103,11 @@ public class ArtistsService {
                     artistSpotify.getHref(),
                     "Unknow Record"
             );
+
+            artistSpotify.getGenres().stream()
+                    .filter(Objects::nonNull)
+                    .forEach(s -> styleService.create(new StyleRequest(s)));
+
             var entity = mapper.fromRequesttoEntity(request);
             entity.setSpotifyCode(codeSpotify);
             repository.save(entity);

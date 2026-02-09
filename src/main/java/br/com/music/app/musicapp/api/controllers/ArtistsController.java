@@ -30,7 +30,7 @@ public class ArtistsController {
 
     @GetMapping("/find")
     @PostMapping
-    public ResponseEntity<ArtistsResponse> findById(@RequestParam Long id){
+    private ResponseEntity<ArtistsResponse> findById(@RequestParam Long id){
         return ResponseEntity.ok(service.findById(id));
     }
 
@@ -52,6 +52,11 @@ public class ArtistsController {
     @PostMapping("/create-by-spotify/")
     public ResponseEntity<ArtistsResponse> createBySpotify(@RequestBody SendToFind codeSpotify){
         return ResponseEntity.ok(service.createBySpotify(codeSpotify.codeSpotify()));
+    }
+
+    @GetMapping("/findname/{name}")
+    public ResponseEntity<ArtistsSpotifyResponse> getByName(@PathVariable("name") String name){
+        return ResponseEntity.ok(service.findByName(name));
     }
 
 }
