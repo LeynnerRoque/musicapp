@@ -77,8 +77,13 @@ public class ArtistsService {
     }
 
     public ArtistsSpotifyResponse findByName(String name){
-        var entity = repository.findArtistsByName(name);
-        return getBySpotify(entity.getSpotifyCode());
+        try{
+            var entity = repository.findArtistsByName(name);
+            return getBySpotify(entity.getSpotifyCode());
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public ArtistsSpotifyResponse getBySpotify(String id){
