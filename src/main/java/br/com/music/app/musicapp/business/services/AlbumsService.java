@@ -92,7 +92,6 @@ public class AlbumsService {
     public AlbunsResponse createBySpotify(String codeSpotify){
         try{
             var responseSpotify = getBySpotifyName(codeSpotify);
-            var name = responseSpotify.getArtists().getName().replace(",","");
 
             if(artistsService.findByName(responseSpotify.getArtists().getName().replace(",","")) == null){
                 artistsService.createBySpotify(responseSpotify.getArtists().getId());
