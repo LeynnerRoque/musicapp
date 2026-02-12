@@ -34,10 +34,8 @@ public class AlbunsMapper {
         var entity = new Albuns();
         BeanUtils.copyProperties(request,entity);
         var artists = repository.findArtistsByName(request.artists());
-        var style = styleRepository.findStyleByNameStyle(request.style());
-        /**
-        * Create a new Style if not exists
-        * */
+        var style = styleRepository.findStyleByNameStyle(request.style()).getFirst();
+
         if(style == null){
             var entityStyle = new Style();
             entityStyle.setNameStyle(request.style());
@@ -52,7 +50,7 @@ public class AlbunsMapper {
         var entity = new Albuns();
         BeanUtils.copyProperties(response,entity);
         var artists = repository.findArtistsByName(response.getArtistsName());
-        var style = styleRepository.findStyleByNameStyle(response.getStyle());
+        var style = styleRepository.findStyleByNameStyle(response.getStyle()).getFirst();
         entity.setArtistsByArtistsId(artists);
         entity.setStyleByStyleId(style);
         return entity;

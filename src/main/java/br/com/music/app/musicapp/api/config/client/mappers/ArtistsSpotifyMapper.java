@@ -43,6 +43,8 @@ public class ArtistsSpotifyMapper {
         response.setId(listConvert.getPropertyValue(values,"id:"));
         response.setType(listConvert.getPropertyValue(values,"type:"));
         response.setHref(listConvert.getPropertyValue(values,"href:"));
+        response.setHref(listConvert.getPropertyValue(values,"popularity:"));
+        response.setHref(listConvert.getPropertyValue(values,"uri:"));
         return response;
     }
 }

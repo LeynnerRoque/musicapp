@@ -87,12 +87,7 @@ public class ArtistsService {
     }
 
     public ArtistsSpotifyResponse getBySpotify(String id){
-        try{
-            var response = clientService.getArtistsBySpotify(id);
-            return spotifyMapper.toResponse(response);
-        }catch (Exception e){
-            return null;
-        }
+        return spotifyMapper.toResponse(clientService.getArtistsBySpotify(id));
     }
 
 
@@ -116,11 +111,7 @@ public class ArtistsService {
             var entity = mapper.fromRequesttoEntity(request);
             entity.setSpotifyCode(codeSpotify);
             repository.save(entity);
-//            if(entity!=null){
-//                kafkaProducerService.sendMessage("database-saved","create item on database");
-//            }else{
-//                kafkaProducerService.sendMessage("database-saved", "dont create database item");
-//            }
+
             return mapper.toResponse(entity);
         } catch (Exception e) {
             return null;
