@@ -20,30 +20,23 @@ public class StyleService {
 
     public StyleResponse create(StyleRequest request){
         try{
+            var existStyle = findByName(request.nameStyle());
+            if(existStyle != null){
+                return existStyle;
+            }
             var entity = repository.save(mapper.fromRequestTomodel(request));
             return mapper.toResponse(entity);
         }catch (Exception e){
-            e.printStackTrace();
-            return null;
+            return new StyleResponse();
         }
-    }
-
-    public StyleResponse update(StyleResponse request){
-        try{
-            var entity = repository.save(mapper.toEntity(request));
-            return mapper.toResponse(entity);
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public StyleResponse findBy(Long id){
-        return mapper.toResponse(repository.findById(id).get());
     }
 
     public List<StyleResponse> findAll(){
         return mapper.toList(repository.findAll());
+    }
+
+    private StyleResponse findByName(String name){
+        return mapper.toResponse(repository.findStyleByNameStyle(name));
     }
 
     public String delete(Long id){

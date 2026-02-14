@@ -20,6 +20,10 @@ public class RecordService {
 
     public RecordResponse create(RecordRequest request){
         try{
+            var existsRecord = findByName(request.name());
+            if(existsRecord != null){
+                return existsRecord;
+            }
             var entity = repository.save(mapper.toEntity(request));
             return mapper.toResponse(entity);
         }catch (Exception e){
@@ -27,25 +31,12 @@ public class RecordService {
         }
     }
 
-    public RecordResponse update(RecordResponse response){
-        try{
-            var entity = repository.save(mapper.toEntity(response));
-            return mapper.toResponse(entity);
-        }catch (Exception e){
-            return null;
-        }
-    }
-
-    public RecordResponse findById(Long id){
-        try{
-            return mapper.toResponse(repository.findById(id).get());
-        }catch (Exception e){
-            return null;
-        }
-    }
-
     public List<RecordResponse> listAll(){
         return mapper.toList(repository.findAll());
+    }
+
+    public RecordResponse findByName(String name){
+        return mapper.toResponse(repository.findRecordByName(name));
     }
 
 
