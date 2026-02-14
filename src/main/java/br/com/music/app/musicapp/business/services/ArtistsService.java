@@ -7,10 +7,12 @@ import br.com.music.app.musicapp.business.util.converters.DateConverters;
 import br.com.music.app.musicapp.domain.dto.mappers.ArtistsMapper;
 import br.com.music.app.musicapp.domain.dto.requests.ArtistsRequest;
 import br.com.music.app.musicapp.domain.dto.requests.StyleRequest;
+import br.com.music.app.musicapp.domain.dto.responses.ArtistDetailResponse;
 import br.com.music.app.musicapp.domain.dto.responses.ArtistsResponse;
 import br.com.music.app.musicapp.domain.repository.ArtistsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -27,22 +29,24 @@ public class ArtistsService {
     private final ArtistsSpotifyMapper spotifyMapper;
     private final DateConverters converters;
     private final StyleService styleService;
+    private final AlbumsService albumsService;
     //private final KafkaProducerService kafkaProducerService;
 
     @Autowired
-    public ArtistsService(ArtistsRepository repository, ArtistsMapper mapper, ArtistsClientService clientService, ArtistsSpotifyMapper spotifyMapper, DateConverters converters, StyleService styleService) {
+    public ArtistsService(ArtistsRepository repository, ArtistsMapper mapper, ArtistsClientService clientService, ArtistsSpotifyMapper spotifyMapper, DateConverters converters, StyleService styleService, @Lazy AlbumsService albumsService) {
         this.repository = repository;
         this.mapper = mapper;
         this.clientService = clientService;
         this.spotifyMapper = spotifyMapper;
         this.converters = converters;
         this.styleService = styleService;
+        this.albumsService = albumsService;
     }
 
 
     public ArtistsResponse create(ArtistsRequest request){
         try{
-            var entity = repository.save(mapper.fromRequesttoEntity(request));
+            var entity = repository.save(mapper.fromRequestToEntity(request));
             return mapper.toResponse(entity);
         }catch (Exception e){
             return null;
@@ -108,7 +112,7 @@ public class ArtistsService {
                     .filter(Objects::nonNull)
                     .forEach(s -> styleService.create(new StyleRequest(s)));
 
-            var entity = mapper.fromRequesttoEntity(request);
+            var entity = mapper.fromRequestToEntity(request);
             entity.setSpotifyCode(codeSpotify);
             repository.save(entity);
 
@@ -116,6 +120,15 @@ public class ArtistsService {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public ArtistDetailResponse details(String name){
+        var artist = findByName(name);
+        var artistBase = repository.findArtistsByName(name);
+        ArtistDetailResponse detail = new ArtistDetailResponse();
+        detail.setDetail(artist);
+        detail.setAlbums(albumsService.buildList(artistBase.getId()));
+        return detail;
     }
 
 }

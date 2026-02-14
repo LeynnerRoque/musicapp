@@ -3,6 +3,7 @@ package br.com.music.app.musicapp.api.controllers;
 import br.com.music.app.musicapp.api.config.client.request.SendToFind;
 import br.com.music.app.musicapp.api.config.client.response.ArtistsSpotifyResponse;
 import br.com.music.app.musicapp.domain.dto.requests.ArtistsRequest;
+import br.com.music.app.musicapp.domain.dto.responses.ArtistDetailResponse;
 import br.com.music.app.musicapp.domain.dto.responses.ArtistsResponse;
 import br.com.music.app.musicapp.business.services.ArtistsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class ArtistsController {
     @GetMapping("/find-name/{name}")
     public ResponseEntity<ArtistsSpotifyResponse> getByName(@PathVariable("name") String name){
         return ResponseEntity.ok(service.findByName(name));
+    }
+
+    @GetMapping("/details/{name}")
+    public ResponseEntity<ArtistDetailResponse> details(@PathVariable("name") String name){
+        return ResponseEntity.ok(service.details(name));
     }
 
 }

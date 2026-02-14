@@ -33,7 +33,7 @@ public class ArtistsMapper {
     }
 
 
-    public Artists fromRequesttoEntity(ArtistsRequest request){
+    public Artists fromRequestToEntity(ArtistsRequest request){
         var entity = new Artists();
         BeanUtils.copyProperties(request,entity);
         var recordBy = repository.findRecordByName(request.record());

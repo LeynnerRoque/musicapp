@@ -9,9 +9,11 @@ import br.com.music.app.musicapp.domain.dto.responses.AlbunsResponse;
 import br.com.music.app.musicapp.domain.repository.AlbunsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -24,7 +26,7 @@ public class AlbumsService {
     private final ArtistsService artistsService;
 
     @Autowired
-    public AlbumsService(AlbunsRepository repository, AlbunsMapper mapper, AlbumClientService albunClientService, AlbumSpotifyMapper spotifyMapper, ArtistsService artistsService) {
+    public AlbumsService(AlbunsRepository repository, AlbunsMapper mapper, @Lazy AlbumClientService albunClientService, AlbumSpotifyMapper spotifyMapper, ArtistsService artistsService) {
         this.repository = repository;
         this.mapper = mapper;
         this.albunClientService = albunClientService;
@@ -79,6 +81,12 @@ public class AlbumsService {
             log.warn("Error on create, {}",e.getMessage());
             return new AlbunsResponse();
         }
+    }
+
+    public List<AlbunsResponse> buildList(Long id){
+        return repository.findAlbunsByArtistIdWithArtistData(id).stream()
+                .filter(Objects::nonNull)
+                .map(mapper::toResponse).toList();
     }
 
 }
