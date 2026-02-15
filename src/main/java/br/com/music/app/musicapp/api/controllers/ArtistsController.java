@@ -2,7 +2,6 @@ package br.com.music.app.musicapp.api.controllers;
 
 import br.com.music.app.musicapp.api.config.client.request.SendToFind;
 import br.com.music.app.musicapp.api.config.client.response.ArtistsSpotifyResponse;
-import br.com.music.app.musicapp.domain.dto.requests.ArtistsRequest;
 import br.com.music.app.musicapp.domain.dto.responses.ArtistDetailResponse;
 import br.com.music.app.musicapp.domain.dto.responses.ArtistsResponse;
 import br.com.music.app.musicapp.business.services.ArtistsService;
@@ -14,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/artists")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ArtistsController {
 
     @Autowired

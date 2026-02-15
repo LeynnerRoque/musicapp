@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/albuns")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AlbumsController {
 
     @Autowired
