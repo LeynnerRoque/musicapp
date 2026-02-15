@@ -45,4 +45,9 @@ public class ArtistsController {
         return ResponseEntity.ok(service.details(name));
     }
 
+    @GetMapping("/all-details")
+    public ResponseEntity<List<ArtistDetailResponse>> allDetails(){
+        return ResponseEntity.ok(service.allDetails());
+    }
+
 }

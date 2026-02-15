@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -129,6 +130,17 @@ public class ArtistsService {
         detail.setDetail(artist);
         detail.setAlbums(albumsService.buildList(artistBase.getId()));
         return detail;
+    }
+
+
+    public List<ArtistDetailResponse> allDetails(){
+        var artistBase = repository.findAll();
+        List<ArtistDetailResponse> artistsDetails = new ArrayList<>();
+        artistBase.stream().filter(Objects::nonNull)
+                .forEach(a -> {
+                    artistsDetails.add(details(a.getName()));
+                });
+        return artistsDetails;
     }
 
 }
