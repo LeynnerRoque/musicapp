@@ -34,7 +34,8 @@ public class AlbunsMapper {
         var entity = new Albuns();
         BeanUtils.copyProperties(request,entity);
         var artists = repository.findArtistsByName(request.artists());
-        var style = styleRepository.findStyleByNameStyle(request.style()).getFirst();
+        var listAlbums = styleRepository.findStyleByNameStyle(request.style());
+        var style = listAlbums.isEmpty() ? null : listAlbums.getFirst();
 
         if(style == null){
             var entityStyle = new Style();
